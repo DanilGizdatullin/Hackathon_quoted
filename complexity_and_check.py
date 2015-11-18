@@ -51,4 +51,4 @@ if __name__ == "__main__":
     print(sentence)
 
     if check_quote(sentence):
-        print sentence_complexity(sentence, fdist)
+        print(sentence_complexity(sentence, fdist))
