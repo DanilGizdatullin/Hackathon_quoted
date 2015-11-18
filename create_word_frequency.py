@@ -2,11 +2,9 @@ import nltk
 import pickle
 
 from nltk.corpus import brown
-from nltk.stem.porter import PorterStemmer
 from nltk.stem.wordnet import WordNetLemmatizer
 
 wordnet_lemmatizer = WordNetLemmatizer()
-# wordnet_lemmatizer.lemmatize
 
 all_words_lemms = []
 cnt = 0
