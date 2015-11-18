@@ -12,16 +12,20 @@ HOST: http://polls.apiblueprint.org/
         {
             "minComplexity": 0.123234,
             "maxComplexity": 0.678242,
-            "search": "nigger"
+            "search": "nigger",
+            "exclude": [
+                123,
+                32525323,
+                2354235
+            ]
         }
 
 + Response 200 (application/json)
 
-        [
-            {
-                "quote": "Never trust a nigger: their minds and hair are full of kinks in equal measure.",
-                "author": "White Guy",
-                "book": "Stupid Ideas",
-                "complexity": 0.2314125
-            }
-        ]
+        {
+            "quote": "Never trust a nigger: their minds and hair are full of kinks in equal measure.",
+            "author": "White Guy",
+            "book": "Stupid Ideas",
+            "complexity": 0.2314125,
+            "id": 123124124
+        }
