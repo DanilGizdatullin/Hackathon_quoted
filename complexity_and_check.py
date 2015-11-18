@@ -11,13 +11,16 @@ wordnet_lemmatizer = WordNetLemmatizer()
 
 def check_quote(quote, min_length=20, max_length=140, one_sentence=True, banned_symbols='[]@<>=', no_nnps=True):
    if len(quote) < min_length or len(quote) > max_length:
+       # print 'Wrong len'
        return False
    elif any((c in set(banned_symbols)) for c in quote):
+       # print 'Bad symbol'
        return False
    elif no_nnps:
        text = nltk.word_tokenize(quote)
        for words in text:
            if words.lower() in names:
+               # print 'Name in quote'
                return False
    return True
 
@@ -38,17 +41,23 @@ def sentence_complexity(sentence, fdist):
             word_lemmatized.append(wordnet_lemmatizer.lemmatize(i[0].lower()))
 
     word_frequency = map(lambda x: fdist[x], word_lemmatized)
-    answer = {}
-    for i in xrange(len(word_frequency)):
-        answer[word_lemmatized[i]] = word_frequency[i]
-    sorted_x = sorted(answer.items(), key=operator.itemgetter(1))
-    sorted_x = list(reversed(sorted_x))
+    word_frequency.sort()
+    print(word_frequency[0:3])
+    complexity = 1 / float(sum(word_frequency[0:3]))
+    # answer = {}
+    # for i in xrange(len(word_frequency)):
+    #     answer[word_lemmatized[i]] = word_frequency[i]
+    # sorted_x = sorted(answer.items(), key=operator.itemgetter(1))
+    # sorted_x = list(reversed(sorted_x))
 
-    return sorted_x
+    return complexity
 
 if __name__ == "__main__":
-    sentence = 'Never trust a nigger: their minds and hair are full of kinks in equal measure'
-    print(sentence)
-
-    if check_quote(sentence):
-        print(sentence_complexity(sentence, fdist))
+    sentence = [0, 0, 0, 0]
+    sentence[0] = 'Never trust a nigger: their minds and hair are full of kinks in equal measure'
+    sentence[1] = 'I am Beloved and she is mine. I see her take flowers away from leaves.'
+    sentence[2] = 'A man of genius makes no mistakes. His errors are volitional and are the portals of discovery'
+    sentence[3] = 'Of children as of procreation the pleasure momentary, the posture ridiculous, the expense damnable.'
+    for i in xrange(4):
+        if check_quote(sentence[i]):
+            print(sentence_complexity(sentence[i], fdist))
