@@ -1,0 +1,31 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# QuotED API
+
+## Quotes Collection [/quotes]
+
+### Get random quote of defined text complexity [POST /quotes/random]
+
++ Request (application/json)
+
+        {
+            "minComplexity": 0.123,
+            "maxComplexity": 0.678
+            "words": [
+                "nigger",
+                "kinks",
+                "trust"
+            ]
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "quote": "Never trust a nigger: their minds and hair are full of kinks in equal measure.",
+                "author": "White Guy",
+                "book": "Stupid Ideas",
+                "complexity": 0.2314125
+            }
+        ]
