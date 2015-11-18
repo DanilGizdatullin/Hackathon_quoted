@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import nltk
 import pickle
 import operator
@@ -25,7 +28,7 @@ def check_quote(quote, min_length=20, max_length=140, one_sentence=True, banned_
    return True
 
 
-def sentence_complexity(sentence, fdist):
+def sentence_complexity(sentence, frequency_dist=fdist):
     word_tokenized = nltk.word_tokenize(sentence)
     word_tokenized_filtered = []
     for i in word_tokenized:
@@ -40,9 +43,9 @@ def sentence_complexity(sentence, fdist):
         else:
             word_lemmatized.append(wordnet_lemmatizer.lemmatize(i[0].lower()))
 
-    word_frequency = map(lambda x: fdist[x], word_lemmatized)
+    word_frequency = map(lambda x: frequency_dist[x], word_lemmatized)
     word_frequency.sort()
-    print(word_frequency[0:3])
+    # print(word_frequency[0:3])
     complexity = 1 / float(sum(word_frequency[0:3]))
     # answer = {}
     # for i in xrange(len(word_frequency)):
@@ -53,11 +56,12 @@ def sentence_complexity(sentence, fdist):
     return complexity
 
 if __name__ == "__main__":
-    sentence = [0, 0, 0, 0]
+    sentence = [0, 0, 0, 0, 0]
     sentence[0] = 'Never trust a nigger: their minds and hair are full of kinks in equal measure'
     sentence[1] = 'I am Beloved and she is mine. I see her take flowers away from leaves.'
     sentence[2] = 'A man of genius makes no mistakes. His errors are volitional and are the portals of discovery'
     sentence[3] = 'Of children as of procreation the pleasure momentary, the posture ridiculous, the expense damnable.'
-    for i in xrange(4):
+    sentence[4] = 'The most bitter insult one can offer to a Londoner is ""bastard"" — which", taken for what it means," is hardly an insult at all.'
+    for i in xrange(5):
         if check_quote(sentence[i]):
             print(sentence_complexity(sentence[i], fdist))
